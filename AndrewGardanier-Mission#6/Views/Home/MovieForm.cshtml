@@ -4,16 +4,21 @@
 @{
 }
 @model MovieInfo
-
 <h1>Enter a Movie</h1>
 
 <form method="post">
 
-    <label asp-for="Category">Category:</label>
-    <Input asp-for="Category" />
-    <br />
-    <label asp-for="SubCategory">SubCategory:</label>
-    <input asp-for="SubCategory" />
+    <input type="hidden" asp-for="MovieID" />
+
+   
+
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select>
     <br />
     <label asp-for="MovieTitle">Movie Title:</label>
     <input asp-for="MovieTitle" />
@@ -44,8 +49,16 @@
     <label asp-for="LentTo">Who have you lent it to:</label>
     <input asp-for="LentTo" />
     <br />
+    <label asp-for="CopiedToPlex">Copied To Plex:</label>
+    <select asp-for="CopiedToPlex">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
     <label asp-for="Notes">Notes:</label>
     <input asp-for="Notes" />
+
     <button type="submit">Submit Application</button>
+
+    <div asp-validation-summary="All"></div>
 
 </form>
